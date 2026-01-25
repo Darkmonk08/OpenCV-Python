@@ -21,4 +21,8 @@ cv2.imshow("pikachu with circle",pikachu)
 #drawing a filled circle
 cv2.circle(pikachu,(200,400),15,(0,0,0),-20)
 cv2.imshow("pikachu with filled circle",pikachu)
+
+#writing on an image
+cv2.putText(pikachu,"pikachu",(250,250),cv2.FONT_HERSHEY_PLAIN,2,(255,0,0),thickness=3)
+cv2.imshow("Pikachu w text",pikachu)
 cv2.waitKey(0)

@@ -1,0 +1,37 @@
+import cv2
+import numpy as np
+
+# green=np.uint8([[[0,255,0]]])
+# HSVgreen=cv2.cvtColor(green,cv2.COLOR_BGR2HSV)
+# print(green)
+# print(HSVgreen)
+
+video=cv2.VideoCapture(r"C:\Users\ragha\OneDrive\Desktop\Jetlearn Python\OpenCv-Python\video.mp4")
+
+for i in range(0,60):
+    status,bg=video.read()
+    if status is False:
+        continue
+
+# cv2.imshow("background",bg)
+# cv2.waitKey(0)
+
+lowerbound=np.array([155,60,60])
+upperbound=np.array([180,255,255])
+
+while video.isOpened():
+    status,frame=video.read()
+    if status is False:
+        break
+    HSVframe=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
+    mask1=cv2.inRange(HSVframe,lowerbound,upperbound)
+    mask1=cv2.morphologyEx(mask1,cv2.MORPH_OPEN,np.ones((3,3)))
+    mask2=cv2.bitwise_not(mask1)
+    result1=cv2.bitwise_and(bg,bg,mask=mask1)
+    result2=cv2.bitwise_and(frame,frame,mask=mask2)
+    result=cv2.add(result1,result2)
+    cv2.imshow("result",result)
+    waitkey=cv2.waitKey(10)
+    if waitkey==27:
+        break
+    

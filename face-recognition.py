@@ -46,7 +46,7 @@ while True:
             image=gframe[y:y+h,x:x+w]
             resizedimage=cv2.resize(image,(width,height))
             prediction=model.predict(resizedimage)
-            cv2.putText(frame,prediction,(250,250),cv2.FONT_HERSHEY_PLAIN,2,(255,0,0),thickness=3)
+            cv2.putText(frame,names[prediction[0]],(x,y-21),cv2.FONT_HERSHEY_PLAIN,2,(255,0,0),thickness=3)
             print(prediction)
     cv2.imshow("frame", frame)
     waitkey=cv2.waitKey(100)
